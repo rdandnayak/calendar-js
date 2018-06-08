@@ -49,7 +49,6 @@ var Calendar = function(model, options, date) {
 };
 
 function createCalendar(calendar, element, adjuster) {
-  // what is adjuster
   if (typeof adjuster !== 'undefined') {
     var newDate = new Date(
       calendar.Selected.Year,
