@@ -1,26 +1,11 @@
 var Calendar = function(model, options, date) {
   // Default Values
-  this.Options = {
-    Color: '',
-    LinkColor: '',
-    NavShow: true,
-    // NavVertical: false,
-    NavLocation: '',
-    DateTimeShow: true,
-    DateTimeFormat: 'mmm, yyyy',
-    DatetimeLocation: '',
-    EventClick: '',
-    EventTargetWholeDay: false,
-    DisabledDays: [],
-    ModelChange: model
-  };
-
   this.Model = '';
   this.Today = '';
   this.Selected = '';
   this.Prev = '';
 
-  model ? (this.Model = model) : (this.Model = {}); // model is events data to be used later on
+  // model ? (this.Model = model) : (this.Model = {}); // model is events data to be used later on
 
   this.Today = new Date();
 
@@ -71,7 +56,7 @@ function createCalendar(calendar, element, adjuster) {
       calendar.Selected.Month + adjuster,
       1
     );
-    calendar = new Calendar(calendar.Model, calendar.Options, newDate);
+    calendar = new Calendar(calendar.Model, {}, newDate);
     element.innerHTML = '';
   } else {
   }
@@ -145,16 +130,11 @@ function createCalendar(calendar, element, adjuster) {
     }
     var days = document.createElement('ul');
     days.className += 'cld-days';
-    // Previous Month's Days
+    // append blank Previous Month's Days
     for (var i = 0; i < calendar.Selected.FirstDay; i++) {
       var day = document.createElement('li');
       day.className += 'cld-day prevMonth';
       console.log(calendar);
-      var number = DayNumber(
-        calendar.Prev.Days - calendar.Selected.FirstDay + (i + 1)
-      );
-      // day.appendChild(number);
-
       days.appendChild(day);
     }
     // Current Month's Days
@@ -165,13 +145,13 @@ function createCalendar(calendar, element, adjuster) {
       var number = DayNumber(i + 1);
       day.appendChild(number);
       // If Today..
-      if (
-        i + 1 == calendar.Today.getDate() &&
-        calendar.Selected.Month == calendar.Today.Month &&
-        calendar.Selected.Year == calendar.Today.Year
-      ) {
-        day.className += ' today';
-      }
+      // if (
+      //   i + 1 == calendar.Today.getDate() &&
+      //   calendar.Selected.Month == calendar.Today.Month &&
+      //   calendar.Selected.Year == calendar.Today.Year
+      // ) {
+      //   day.className += ' today';
+      // }
       days.appendChild(day);
     }
 
